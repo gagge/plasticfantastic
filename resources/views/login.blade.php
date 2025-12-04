@@ -1,6 +1,6 @@
 <x-mainLayout>
     <x-slot:title>
-        Home
+        {{ $title }}
     </x-slot:title>
-    <h1>Welcome to the Plastic Fantastic</h1> 
+    <h1>Login and such</h1>
 </x-mainLayout>

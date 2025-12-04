@@ -1,0 +1,49 @@
+networks:
+  plasticfantastic:
+    ipam:
+      config:
+        - subnet: 172.0.0.0/16
+          gateway: 172.0.0.1
+    name: plasticfantastic-development
+
+services:
+  pf-php:
+    hostname: php-fpm
+    container_name: pf-php
+    build: ./infrastructure/development/php/
+    ports:
+      - 9000
+    networks:
+      plasticfantastic:
+        ipv4_address: 172.0.0.101
+    volumes:
+      - ./:/var/www/html/
+
+  pf-nginx:
+    build: ./infrastructure/development/nginx/
+    hostname: nginx
+    container_name: pf-nginx
+    ports:
+      - 80
+    networks:
+      plasticfantastic:
+        ipv4_address: 172.0.0.102
+    volumes:
+      - ./:/var/www/html/
+
+  pf-mysql:
+    image: mysql:8.0
+    hostname: mysql
+    container_name: pf-mysql
+    environment:
+      MYSQL_DATABASE: plasticfantastic
+      MYSQL_ROOT_PASSWORD: verySecretPassword
+      MYSQL_USER: plasticfantastic
+      MYSQL_PASSWORD: verySecretPassword
+    ports:
+      - 3306
+    networks:
+      plasticfantastic:
+        ipv4_address: 172.0.0.103
+    volumes:
+      - ./infrastructure/development/mysql-data:/var/lib/mysql

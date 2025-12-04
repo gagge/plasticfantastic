@@ -3,5 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['reka' => 'Homes']);
 });
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+  
