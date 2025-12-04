@@ -11,4 +11,5 @@ Route::get('/about', function () {
 });
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
-  
+
+Route::get('/records', [App\Http\Controllers\RecordsController::class, 'index'])->name('records');
